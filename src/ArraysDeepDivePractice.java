@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Random;
 
 public class ArraysDeepDivePractice {
     public static void main(String[] args) {
@@ -13,36 +14,23 @@ public class ArraysDeepDivePractice {
         System.out.println("=== ARRAY MULTIDIMENSI DASAR ===");
 
         // Latihan 1: Membuat dan mengisi array 2D (matriks)
-        // - Buat array 2D integer dengan ukuran 3x4 (3 baris, 4 kolom)
         int [][] matriks= new int[3][4];
-        // - Isi array dengan nilai: baris 0: [1,2,3,4], baris 1: [5,6,7,8], baris 2: [9,10,11,12]
         matriks[0] = new int[]{1, 2, 3 ,4};
         matriks[1] = new int[]{5, 6, 7, 8};
         matriks[2] = new int[]{9, 10, 11, 12};
-        // - Print seluruh matriks menggunakan nested loop dengan format yang rapi
-        System.out.println("Isi Matriks");
-        for (int i=0; i<matriks.length; i++){
-            for (int j=0; j<matriks[i].length; j++){
-                System.out.printf("%4d", matriks[i][j]);
-            }
-            System.out.println();
-        }
-        // Latihan 2: Array 2D dengan inisialisasi langsung
-        // - Buat array 2D string yang merepresentasikan papan catur 3x3 dengan nilai awal "."
+
+        System.out.println("Isi Matriks:");
+        displayMatrix(matriks);
+
+        // Latihan 2: Array 2D papan catur
         String[][] board = {
                 {".", ".", "."},
                 {".", ".", "."},
                 {".", ".", "."}
         };
-        // - Tempatkan "X" di posisi [0][0], [1][1], dan [2][2] (diagonal)
-        board[0][0] ="X";
-        board[1][1] ="X";
-        board[2][2] ="X";
-        // - Tempatkan "O" di posisi [0][2], [1][0], dan [2][1]
-        board[0][2] ="O";
-        board[1][0] ="O";
-        board[2][1] ="O";
-        // - Print papan dengan format grid yang rapi
+        board[0][0] ="X"; board[1][1] ="X"; board[2][2] ="X";
+        board[0][2] ="O"; board[1][0] ="O"; board[2][1] ="O";
+
         System.out.println("\nPapan Catur: ");
         for(int i=0; i<board.length; i++){
             for (int j=0; j<board[i].length; j++){
@@ -51,163 +39,211 @@ public class ArraysDeepDivePractice {
             System.out.println();
         }
 
-        // ===== ARRAY JAGGED (IRREGULAR) =====
+        // ===== ARRAY JAGGED =====
         System.out.println("\n=== ARRAY JAGGED (IRREGULAR) ===");
-
-        // Latihan 3: Array dengan panjang baris yang berbeda
-        // - Buat array 2D integer dengan 4 baris: baris 0 panjang 2, baris 1 panjang 4, baris 2 panjang 3, baris 3 panjang 5
         int [][] jaggedArray = new int [4][];
         jaggedArray[0] = new int [2];
         jaggedArray[1] = new int [4];
         jaggedArray[2] = new int [3];
         jaggedArray[3] = new int [5];
-        // - Isi setiap baris dengan angka berurutan dimulai dari 1
+
         int value = 1;
         for (int i=0; i<jaggedArray.length; i++){
             for (int j=0; j<jaggedArray[i].length; j++){
                 jaggedArray[i][j] = value++;
             }
-            System.out.println("Isi Array Jagged");
-            for (int m = 0; m < jaggedArray.length; m++) {
-                System.out.print("Baris " + m + " (panjang " + jaggedArray[m].length + "): ");
-                for (int j = 0; j < jaggedArray[m].length; j++) {
-                    System.out.print(jaggedArray[m][j] + " ");
-                }
-                System.out.println();
-            }
         }
 
-        // - Print array jagged dengan menampilkan panjang setiap baris
+        System.out.println("Isi Array Jagged:");
+        for (int i=0; i<jaggedArray.length; i++){
+            System.out.print("Baris " + i + " (panjang " + jaggedArray[i].length + "): ");
+            for (int j=0; j<jaggedArray[i].length; j++){
+                System.out.print(jaggedArray[i][j] + " ");
+            }
+            System.out.println();
+        }
 
         // ===== OPERASI LANJUTAN PADA ARRAY =====
         System.out.println("\n=== OPERASI LANJUTAN PADA ARRAY ===");
 
-        // Latihan 4: Operasi matematika pada array 2D
-        // - Buat dua matriks 2x3 dengan nilai bebas
+        int[][] matrixA = {
+                {1, 2, 3},
+                {4, 5, 6}
+        };
+        int[][] matrixB = {
+                {7, 8, 9},
+                {10, 11, 12}
+        };
 
-        // - Implementasikan penjumlahan matriks (buat method addMatrices)
+        int[][] sum = addMatrices(matrixA, matrixB);
+        int[][] scalarA = multiplyByScalar(matrixA, 2);
+        int[][] scalarB = multiplyByScalar(matrixB, 2);
 
-        // - Implementasikan perkalian setiap elemen dengan scalar 2 (buat method multiplyByScalar)
-
-        // - Print hasil operasi
+        System.out.println("Matrix A:");
+        displayMatrix(matrixA);
+        System.out.println("Matrix B:");
+        displayMatrix(matrixB);
+        System.out.println("Hasil Penjumlahan (A + B):");
+        displayMatrix(sum);
+        System.out.println("Matrix A * 2:");
+        displayMatrix(scalarA);
+        System.out.println("Matrix B * 2:");
+        displayMatrix(scalarB);
 
         // ===== ARRAY SEBAGAI PARAMETER DAN RETURN VALUE =====
-        System.out.println("\\n=== ARRAY SEBAGAI PARAMETER DAN RETURN VALUE ===");
+        System.out.println("\n=== ARRAY SEBAGAI PARAMETER DAN RETURN VALUE ===");
 
-        // Latihan 5: Method yang menerima dan mengembalikan array
         int[] numbers = {64, 34, 25, 12, 22, 11, 90};
+        System.out.println("Array asli: " + Arrays.toString(numbers));
 
-        // - Panggil method sortArray untuk mengurutkan array
-        // (implementasikan method sortArray yang menerima array dan mengembalikan array yang sudah diurutkan)
+        int[] sorted = sortArray(numbers.clone());
+        System.out.println("Setelah sorting: " + Arrays.toString(sorted));
 
-        // - Panggil method reverseArray untuk membalik array
-        // (implementasikan method reverseArray)
+        int[] reversed = reverseArray(sorted);
+        System.out.println("Setelah dibalik: " + Arrays.toString(reversed));
 
-        // - Panggil method findMinMax untuk mencari nilai minimum dan maksimum
-        // (implementasikan method yang mengembalikan array int dengan 2 elemen: [min, max])
+        int[] minMax = findMinMax(numbers);
+        System.out.println("Min: " + minMax[0] + ", Max: " + minMax[1]);
 
         // ===== UTILITY METHODS JAVA.UTIL.ARRAYS =====
-        System.out.println("\\n=== UTILITY METHODS JAVA.UTIL.ARRAYS ===");
+        System.out.println("\n=== UTILITY METHODS JAVA.UTIL.ARRAYS ===");
 
-        // Latihan 6: Eksplorasi utility methods Arrays
         int[] data = {5, 2, 8, 1, 9, 3};
+        System.out.println("Array awal: " + Arrays.toString(data));
 
-        // - Gunakan Arrays.toString() untuk print array
+        Arrays.sort(data);
+        System.out.println("Sorted: " + Arrays.toString(data));
 
-        // - Gunakan Arrays.sort() untuk mengurutkan array
+        int pos = Arrays.binarySearch(data, 8);
+        System.out.println("Index dari 8: " + pos);
 
-        // - Gunakan Arrays.binarySearch() untuk mencari elemen (array harus sudah diurutkan)
+        Arrays.fill(data, 7);
+        System.out.println("Setelah fill: " + Arrays.toString(data));
 
-        // - Gunakan Arrays.fill() untuk mengisi array dengan nilai tertentu
-
-        // - Gunakan Arrays.equals() untuk membandingkan dua array
-
-        // - Gunakan Arrays.copyOf() untuk membuat copy array dengan ukuran berbeda
+        int[] copy = Arrays.copyOf(data, 10);
+        System.out.println("Copy dengan panjang 10: " + Arrays.toString(copy));
 
         // ===== ARRAY 3D DAN KOMPLEKS =====
-        System.out.println("\\n=== ARRAY 3D DAN KOMPLEKS ===");
+        System.out.println("\n=== ARRAY 3D DAN KOMPLEKS ===");
 
-        // Latihan 7: Array 3 dimensi
-        // - Buat array 3D integer ukuran 2x3x4 (seperti 2 buah matriks 3x4)
+        int[][][] array3D = new int[2][3][4];
+        int counter = 1;
+        for (int i=0; i<array3D.length; i++){
+            for (int j=0; j<array3D[i].length; j++){
+                for (int k=0; k<array3D[i][j].length; k++){
+                    array3D[i][j][k] = counter++;
+                }
+            }
+        }
 
-        // - Isi dengan nilai berurutan dari 1
-
-        // - Print menggunakan triple nested loop dengan format yang jelas
+        for (int i=0; i<array3D.length; i++){
+            System.out.println("Matriks ke-" + (i+1));
+            displayMatrix(array3D[i]);
+        }
 
         // ===== SKENARIO APLIKASI NYATA =====
-        System.out.println("\\n=== SKENARIO APLIKASI NYATA ===");
+        System.out.println("\n=== SKENARIO APLIKASI NYATA ===");
 
-        // Latihan 8: Sistem nilai mahasiswa
-        // - Buat array 2D untuk menyimpan nilai 5 mahasiswa, 4 mata kuliah
         String[] namaMahasiswa = {"Alice", "Bob", "Charlie", "Diana", "Eva"};
         String[] mataKuliah = {"Math", "Physics", "Chemistry", "Biology"};
+        int[][] nilai = new int[namaMahasiswa.length][mataKuliah.length];
+        fillRandomGrades(nilai, 60, 100);
 
-        // - Isi dengan nilai random antara 60-100
+        System.out.printf("%-10s", "Nama");
+        for (String mk : mataKuliah) {
+            System.out.printf("%10s", mk);
+        }
+        System.out.printf("%10s%n", "Rata-rata");
 
-        // - Hitung rata-rata per mahasiswa
+        double highestAvg = 0;
+        String topStudent = "";
 
-        // - Hitung rata-rata per mata kuliah
-
-        // - Tentukan mahasiswa dengan nilai tertinggi
-
-        // - Print dalam format tabel yang rapi
-
-        // Latihan 9: Game Tic-Tac-Toe sederhana
-        // - Buat array 2D char 3x3 untuk papan permainan
-
-        // - Implementasikan method untuk menampilkan papan
-
-        // - Implementasikan method untuk mengecek apakah ada pemenang
-
-        // - Simulasikan beberapa langkah permainan
+        for (int i=0; i<nilai.length; i++){
+            System.out.printf("%-10s", namaMahasiswa[i]);
+            double avg = calculateAverage(nilai[i]);
+            for (int j=0; j<nilai[i].length; j++){
+                System.out.printf("%10d", nilai[i][j]);
+            }
+            System.out.printf("%10.2f%n", avg);
+            if (avg > highestAvg){
+                highestAvg = avg;
+                topStudent = namaMahasiswa[i];
+            }
+        }
+        System.out.println("\nMahasiswa dengan nilai rata-rata tertinggi: " + topStudent + " (" + highestAvg + ")");
     }
 
     // ===== IMPLEMENTASI METHODS =====
-    // TODO: Implementasikan method-method yang diperlukan di sini
-
-    // Method untuk penjumlahan matriks
     public static int[][] addMatrices(int[][] matrix1, int[][] matrix2) {
-        // Implementasi penjumlahan matriks
-        return null; // Ganti dengan implementasi yang benar
+        int rows = matrix1.length;
+        int cols = matrix1[0].length;
+        int[][] result = new int[rows][cols];
+        for (int i=0; i<rows; i++){
+            for (int j=0; j<cols; j++){
+                result[i][j] = matrix1[i][j] + matrix2[i][j];
+            }
+        }
+        return result;
     }
 
-    // Method untuk perkalian scalar
     public static int[][] multiplyByScalar(int[][] matrix, int scalar) {
-        // Implementasi perkalian scalar
-        return null; // Ganti dengan implementasi yang benar
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        int[][] result = new int[rows][cols];
+        for (int i=0; i<rows; i++){
+            for (int j=0; j<cols; j++){
+                result[i][j] = matrix[i][j] * scalar;
+            }
+        }
+        return result;
     }
 
-    // Method untuk sorting array
     public static int[] sortArray(int[] arr) {
-        // Implementasi sorting (bisa menggunakan Arrays.sort atau implementasi sendiri)
-        return null; // Ganti dengan implementasi yang benar
+        Arrays.sort(arr);
+        return arr;
     }
 
-    // Method untuk reverse array
     public static int[] reverseArray(int[] arr) {
-        // Implementasi reverse array
-        return null; // Ganti dengan implementasi yang benar
+        int n = arr.length;
+        int[] result = new int[n];
+        for (int i=0; i<n; i++){
+            result[i] = arr[n-1-i];
+        }
+        return result;
     }
 
-    // Method untuk find min dan max
     public static int[] findMinMax(int[] arr) {
-        // Return array dengan format [min, max]
-        return null; // Ganti dengan implementasi yang benar
+        int min = arr[0];
+        int max = arr[0];
+        for (int num : arr){
+            if (num < min) min = num;
+            if (num > max) max = num;
+        }
+        return new int[]{min, max};
     }
 
-    // Method untuk display array 2D
     public static void displayMatrix(int[][] matrix) {
-        // Implementasi untuk menampilkan matriks dengan format rapi
+        for (int i=0; i<matrix.length; i++){
+            for (int j=0; j<matrix[i].length; j++){
+                System.out.printf("%4d", matrix[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 
-    // Method untuk mengisi array 2D dengan nilai random
     public static void fillRandomGrades(int[][] grades, int min, int max) {
-        // Implementasi untuk mengisi array dengan nilai random
+        Random rand = new Random();
+        for (int i=0; i<grades.length; i++){
+            for (int j=0; j<grades[i].length; j++){
+                grades[i][j] = rand.nextInt(max - min + 1) + min;
+            }
+        }
     }
 
-    // Method untuk menghitung rata-rata array
     public static double calculateAverage(int[] values) {
-        // Implementasi untuk menghitung rata-rata
-        return 0.0; // Ganti dengan implementasi yang benar
+        int sum = 0;
+        for (int v : values) sum += v;
+        return (double) sum / values.length;
     }
 }

@@ -1,222 +1,252 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
+import java.util.*;
 
 public class CollectionsPractice {
     public static void main(String[] args) {
-        /*
-         * PRAKTIK HANDS-ON: Collections
-         *
-         * Instruksi: Lengkapi semua latihan di bawah ini untuk menguasai
-         * ArrayList, generics, operasi CRUD, dan iterasi collections.
-         */
 
-        // ===== PERBEDAAN ARRAY VS ARRAYLIST =====
-        System.out.println("=== PERBEDAAN ARRAY VS ARRAYLIST ===");
+        // ===== LATIHAN 1: Perbedaan Array vs ArrayList =====
+        System.out.println("=== LATIHAN 1: ARRAY vs ARRAYLIST ===");
+        // Array (ukuran tetap)
+        String[] arrayNama = new String[3];
+        arrayNama[0] = "Andi";
+        arrayNama[1] = "Budi";
+        arrayNama[2] = "Cici";
 
-        // Latihan 1: Demonstrasi keterbatasan array vs keunggulan ArrayList
-        // - Buat array integer dengan ukuran tetap 3
+        // ArrayList (ukuran dinamis)
+        ArrayList<String> listNama = new ArrayList<>();
+        listNama.add("Andi");
+        listNama.add("Budi");
+        listNama.add("Cici");
+        listNama.add("Doni"); // bisa tambah lebih dari 3
 
-        // - Buat ArrayList<Integer> kosong
+        System.out.println("Array: " + Arrays.toString(arrayNama));
+        System.out.println("ArrayList: " + listNama);
 
-        // - Coba tambahkan 5 elemen ke array (akan error/terbatas)
-        // - Tambahkan 5 elemen ke ArrayList (dinamis)
+        // ===== LATIHAN 2: Generics Dasar =====
+        System.out.println("\n=== LATIHAN 2: GENERICS ===");
+        // Tanpa generics (raw type) -> tidak type-safe
+        ArrayList rawList = new ArrayList();
+        rawList.add("Teks");
+        rawList.add(123); // campur tipe
+        System.out.println("Raw ArrayList: " + rawList);
 
-        // - Print ukuran keduanya dan jelaskan perbedaannya dalam komentar
+        // Dengan generics
+        ArrayList<String> stringList = new ArrayList<>();
+        stringList.add("Satu");
+        stringList.add("Dua");
 
-        // ===== GENERICS DASAR =====
-        System.out.println("\\n=== GENERICS DASAR ===");
+        ArrayList<Double> doubleList = new ArrayList<>();
+        doubleList.add(3.14);
+        doubleList.add(2.71);
 
-        // Latihan 2: Memahami generics dan type safety
-        // - Buat ArrayList tanpa generics (raw type) dan tambahkan berbagai tipe data
+        System.out.println("ArrayList<String>: " + stringList);
+        System.out.println("ArrayList<Double>: " + doubleList);
 
-        // - Buat ArrayList<String> dengan generics dan tambahkan hanya String
-
-        // - Buat ArrayList<Double> untuk menyimpan nilai desimal
-
-        // - Demonstrasikan type safety dengan mencoba menambahkan tipe yang salah
-
-        // ===== OPERASI CRUD PADA ARRAYLIST =====
-        System.out.println("\\n=== OPERASI CRUD PADA ARRAYLIST ===");
-
-        // Latihan 3: Create - Menambah data
-        ArrayList<String> daftarMahasiswa = new ArrayList<>();
-
-        // - Tambahkan 5 nama mahasiswa menggunakan add()
-
-        // - Tambahkan mahasiswa di posisi tertentu menggunakan add(index, element)
-
-        // - Print daftar mahasiswa
-
-        // Latihan 4: Read - Membaca data
-        // - Baca mahasiswa pertama menggunakan get(0)
-
-        // - Baca mahasiswa terakhir
-
-        // - Cek apakah ada mahasiswa dengan nama tertentu menggunakan contains()
-
-        // - Temukan index mahasiswa tertentu menggunakan indexOf()
-
-        // - Print ukuran ArrayList menggunakan size()
-
-        // Latihan 5: Update - Mengubah data
-        // - Ubah nama mahasiswa di index tertentu menggunakan set()
-
-        // - Print daftar setelah update
-
-        // Latihan 6: Delete - Menghapus data
-        // - Hapus mahasiswa berdasarkan index menggunakan remove(index)
-
-        // - Hapus mahasiswa berdasarkan nama menggunakan remove(object)
-
-        // - Hapus semua mahasiswa menggunakan clear()
-
-        // - Cek apakah ArrayList kosong menggunakan isEmpty()
-
-        // ===== ITERASI ARRAYLIST =====
-        System.out.println("\\n=== ITERASI ARRAYLIST ===");
-
-        // Latihan 7: Berbagai cara iterasi
-        ArrayList<Integer> angka = new ArrayList<>();
-        // Isi dengan angka 10, 20, 30, 40, 50
-
-        // - Iterasi menggunakan traditional for loop
-
-        // - Iterasi menggunakan enhanced for loop (for-each)
-
-        // - Iterasi menggunakan while loop
-
-        // - Iterasi menggunakan Iterator
-
-        // ===== ARRAYLIST DENGAN TIPE DATA KOMPLEKS =====
-        System.out.println("\\\\n=== ARRAYLIST DENGAN TIPE DATA KOMPLEKS ===");
-
-        // Latihan 8: ArrayList of Arrays (simulasi objects)
-        // - Buat ArrayList<String[]> untuk menyimpan data mahasiswa (nama, nim, jurusan)
-        ArrayList<String[]> dataMahasiswa = new ArrayList<>();
-
-        // - Tambahkan 3 data mahasiswa
-        // TODO: Tambahkan data mahasiswa
-
-        // - Print semua data dengan format tabel
-        // TODO: Print dalam format tabel
-
-        // ===== UTILITY METHODS COLLECTIONS =====
-        System.out.println("\\\\n=== UTILITY METHODS COLLECTIONS ===");
-
-        // Latihan 9: Eksplorasi Collections utility
-        ArrayList<Integer> numbers = new ArrayList<>();
-        // TODO: Isi dengan angka: 64, 34, 25, 12, 22, 11, 90
-
-        // - Gunakan Collections.sort() untuk mengurutkan
-        // TODO: Sort list
-
-        // - Gunakan Collections.reverse() untuk membalik urutan
-        // TODO: Reverse list
-
-        // - Gunakan Collections.shuffle() untuk mengacak
-        // TODO: Shuffle list
-
-        // - Gunakan Collections.max() dan Collections.min()
-        // TODO: Find max dan min
-
-        // - Gunakan Collections.frequency() untuk menghitung kemunculan elemen
-        // TODO: Count frequency
-
-        // ===== SEARCHING DAN SORTING =====
-        System.out.println("\\\\n=== SEARCHING DAN SORTING ===");
-
-        // Latihan 10: Implementasi search dan sort
+        // ===== LATIHAN 3: CREATE (Tambah Data) =====
+        System.out.println("\n=== LATIHAN 3: CREATE ===");
         ArrayList<String> buah = new ArrayList<>();
-        // TODO: Isi dengan: "Apel", "Jeruk", "Mangga", "Pisang", "Anggur"
+        buah.add("Apel");
+        buah.add("Jeruk");
+        buah.add("Mangga");
+        System.out.println("Setelah tambah: " + buah);
 
-        // - Sort secara alfabetis
-        // TODO: Sort alphabetically
+        // ===== LATIHAN 4: READ (Baca Data) =====
+        System.out.println("\n=== LATIHAN 4: READ ===");
+        System.out.println("Elemen index 1: " + buah.get(1));
+        System.out.println("Apakah ada Mangga? " + buah.contains("Mangga"));
+        System.out.println("Index Jeruk: " + buah.indexOf("Jeruk"));
+        System.out.println("Jumlah elemen: " + buah.size());
 
-        // - Implementasikan binary search pada list yang sudah diurutkan
-        // TODO: Binary search
+        // ===== LATIHAN 5: UPDATE (Ubah Data) =====
+        System.out.println("\n=== LATIHAN 5: UPDATE ===");
+        buah.set(1, "Pisang");
+        System.out.println("Setelah update index 1: " + buah);
 
-        // - Implementasikan linear search untuk list yang tidak diurutkan
-        // TODO: Linear search
+        // ===== LATIHAN 6: DELETE (Hapus Data) =====
+        System.out.println("\n=== LATIHAN 6: DELETE ===");
+        buah.remove("Apel");
+        System.out.println("Setelah hapus Apel: " + buah);
+        buah.clear();
+        System.out.println("Setelah clear: " + buah + " | isEmpty? " + buah.isEmpty());
 
-        // ===== ARRAYLIST 2D =====
-        System.out.println("\\\\n=== ARRAYLIST 2D ===");
+        // ===== LATIHAN 7: Iterasi ArrayList =====
+        System.out.println("\n=== LATIHAN 7: ITERASI ===");
+        ArrayList<String> hewan = new ArrayList<>(Arrays.asList("Kucing", "Anjing", "Kelinci"));
 
-        // Latihan 11: ArrayList of ArrayList (2D dynamic array)
-        // - Buat ArrayList<ArrayList<Integer>> untuk merepresentasikan matriks dinamis
-        ArrayList<ArrayList<Integer>> matrix2D = new ArrayList<>();
+        // For loop biasa
+        for (int i = 0; i < hewan.size(); i++) {
+            System.out.println("Index " + i + ": " + hewan.get(i));
+        }
 
-        // - Buat 3 baris dengan panjang yang berbeda-beda
-        // TODO: Create jagged 2D ArrayList
+        // Enhanced for loop
+        for (String h : hewan) {
+            System.out.println("For-each: " + h);
+        }
 
-        // - Isi dengan nilai dan print dalam format matriks
-        // TODO: Fill dan print matrix
+        // While loop
+        int idx = 0;
+        while (idx < hewan.size()) {
+            System.out.println("While: " + hewan.get(idx));
+            idx++;
+        }
 
-        // ===== SKENARIO APLIKASI NYATA =====
-        System.out.println("\\\\n=== SKENARIO APLIKASI NYATA ===");
+        // Iterator
+        Iterator<String> iterator = hewan.iterator();
+        while (iterator.hasNext()) {
+            System.out.println("Iterator: " + iterator.next());
+        }
 
-        // Latihan 12: Sistem manajemen perpustakaan sederhana
-        ArrayList<String[]> daftarBuku = new ArrayList<>();
-        // Format: [judul, pengarang, tahun, status] // status: "tersedia" atau "dipinjam"
+        // ===== LATIHAN 8: ArrayList dengan Data Kompleks =====
+        System.out.println("\n=== LATIHAN 8: DATA KOMPLEKS ===");
+        ArrayList<String[]> mahasiswa = new ArrayList<>();
+        mahasiswa.add(new String[]{"Andi", "123", "Informatika"});
+        mahasiswa.add(new String[]{"Budi", "124", "Sistem Informasi"});
 
-        // - Tambahkan 5 buku
-        // TODO: Tambahkan data buku
+        for (String[] m : mahasiswa) {
+            System.out.println("Nama: " + m[0] + ", NIM: " + m[1] + ", Jurusan: " + m[2]);
+        }
 
-        // - Implementasikan fungsi pinjam buku (ubah status)
-        // TODO: Implementasikan pinjam buku
+        // ===== LATIHAN 9: Utility Collections =====
+        System.out.println("\n=== LATIHAN 9: COLLECTIONS UTILITY ===");
+        ArrayList<Integer> angka = new ArrayList<>(Arrays.asList(5, 3, 8, 1, 9));
+        System.out.println("Asli: " + angka);
 
-        // - Implementasikan fungsi kembalikan buku
-        // TODO: Implementasikan kembalikan buku
+        Collections.sort(angka);
+        System.out.println("Sort: " + angka);
 
-        // - Implementasikan pencarian buku berdasarkan judul
-        // TODO: Implementasikan search buku
+        Collections.reverse(angka);
+        System.out.println("Reverse: " + angka);
 
-        // - Print daftar buku yang tersedia
-        // TODO: Print available books
+        Collections.shuffle(angka);
+        System.out.println("Shuffle: " + angka);
 
-        // Latihan 13: Sistem nilai mahasiswa dinamis
-        // TODO: Implementasikan sistem nilai yang bisa menambah mahasiswa dinamis
+        System.out.println("Max: " + Collections.max(angka));
+        System.out.println("Min: " + Collections.min(angka));
+        System.out.println("Frequency 3: " + Collections.frequency(angka, 3));
 
-        // ===== PERFORMANCE COMPARISON =====
-        System.out.println("\\\\n=== PERFORMANCE COMPARISON ===");
+        // ===== LATIHAN 10: Searching & Sorting =====
+        System.out.println("\n=== LATIHAN 10: SEARCHING & SORTING ===");
+        ArrayList<String> buah2 = new ArrayList<>(Arrays.asList("Mangga", "Apel", "Jeruk", "Pisang"));
+        Collections.sort(buah2);
+        System.out.println("Sorted: " + buah2);
 
-        // Latihan 14: Bandingkan performa Array vs ArrayList
-        // TODO: Implementasikan comparison waktu akses, insert, search
+        int pos = Collections.binarySearch(buah2, "Jeruk");
+        System.out.println("Binary search Jeruk: index " + pos);
+
+        boolean ketemu = false;
+        for (int i = 0; i < buah2.size(); i++) {
+            if (buah2.get(i).equals("Mangga")) {
+                System.out.println("Linear search Mangga di index " + i);
+                ketemu = true;
+                break;
+            }
+        }
+        if (!ketemu) System.out.println("Mangga tidak ditemukan");
+
+        // ===== LATIHAN 11: ArrayList 2D =====
+        System.out.println("\n=== LATIHAN 11: ARRAYLIST 2D ===");
+        ArrayList<ArrayList<Integer>> matrix = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            ArrayList<Integer> row = new ArrayList<>();
+            for (int j = 0; j < 3; j++) {
+                row.add(i + j);
+            }
+            matrix.add(row);
+        }
+        System.out.println("Matrix 2D: " + matrix);
+
+        // ===== LATIHAN 12: Skenario Nyata (Perpustakaan) =====
+        System.out.println("\n=== LATIHAN 12: PERPUSTAKAAN ===");
+        ArrayList<String[]> buku = new ArrayList<>();
+        buku.add(new String[]{"Pemrograman Java", "Andi", "2020", "tersedia"});
+        buku.add(new String[]{"Basis Data", "Budi", "2019", "tersedia"});
+
+        pinjamBuku(buku, "Basis Data");
+        kembalikanBuku(buku, "Basis Data");
+        cariBuku(buku, "Java");
+
+        System.out.println("Daftar Buku:");
+        for (String[] b : buku) {
+            System.out.println(Arrays.toString(b));
+        }
+
+        // ===== LATIHAN 13: Sistem Nilai Mahasiswa Dinamis =====
+        System.out.println("\n=== LATIHAN 13: SISTEM NILAI MAHASISWA DINAMIS ===");
+        ArrayList<String> namaMhs = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> nilaiMhs = new ArrayList<>();
+
+        // Tambah mahasiswa 1
+        namaMhs.add("Andi");
+        ArrayList<Integer> nilaiAndi = new ArrayList<>();
+        Collections.addAll(nilaiAndi, 80, 90, 75);
+        nilaiMhs.add(nilaiAndi);
+
+        // Tambah mahasiswa 2
+        namaMhs.add("Budi");
+        ArrayList<Integer> nilaiBudi = new ArrayList<>();
+        Collections.addAll(nilaiBudi, 85, 70, 95);
+        nilaiMhs.add(nilaiBudi);
+
+        // Print nilai
+        for (int k = 0; k < namaMhs.size(); k++) {
+            System.out.println(namaMhs.get(k) + " : " + nilaiMhs.get(k) +
+                    " | Rata-rata = " + hitungRataRata(nilaiMhs.get(k)));
+        }
+
+        // ===== LATIHAN 14: Performance Comparison =====
+        System.out.println("\n=== LATIHAN 14: PERFORMANCE COMPARISON ===");
+        int n = 1000000;
+
+        // Array biasa
+        long startArray = System.currentTimeMillis();
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) arr[i] = i;
+        long endArray = System.currentTimeMillis();
+        System.out.println("Array waktu: " + (endArray - startArray) + " ms");
+
+        // ArrayList
+        long startList = System.currentTimeMillis();
+        ArrayList<Integer> arrList = new ArrayList<>();
+        for (int i = 0; i < n; i++) arrList.add(i);
+        long endList = System.currentTimeMillis();
+        System.out.println("ArrayList waktu: " + (endList - startList) + " ms");
     }
 
-    // ===== HELPER METHODS =====
-    // TODO: Implementasikan method-method pembantu di sini
-
-    public static void printArrayList(ArrayList<?> list, String title) {
-        // TODO: Print ArrayList dengan title
+    // ===== Helper Methods =====
+    public static void pinjamBuku(ArrayList<String[]> buku, String judul) {
+        for (String[] b : buku) {
+            if (b[0].equalsIgnoreCase(judul) && b[3].equals("tersedia")) {
+                b[3] = "dipinjam";
+                System.out.println(judul + " berhasil dipinjam.");
+                return;
+            }
+        }
+        System.out.println(judul + " tidak tersedia.");
     }
 
-    public static int linearSearch(ArrayList<String> list, String target) {
-        // TODO: Implementasi linear search
-        return -1;
+    public static void kembalikanBuku(ArrayList<String[]> buku, String judul) {
+        for (String[] b : buku) {
+            if (b[0].equalsIgnoreCase(judul) && b[3].equals("dipinjam")) {
+                b[3] = "tersedia";
+                System.out.println(judul + " berhasil dikembalikan.");
+                return;
+            }
+        }
+        System.out.println(judul + " tidak ditemukan.");
     }
 
-    public static void printMatrix2D(ArrayList<ArrayList<Integer>> matrix) {
-        // TODO: Print 2D ArrayList matrix
-    }
-
-    public static boolean pinjamBuku(ArrayList<String[]> daftarBuku, String judul) {
-        // TODO: Implementasi pinjam buku
-        return false;
-    }
-
-    public static boolean kembalikanBuku(ArrayList<String[]> daftarBuku, String judul) {
-        // TODO: Implementasi kembalikan buku
-        return false;
-    }
-
-    public static String[] cariBuku(ArrayList<String[]> daftarBuku, String judul) {
-        // TODO: Implementasi cari buku
-        return null;
+    public static void cariBuku(ArrayList<String[]> buku, String keyword) {
+        System.out.println("Hasil pencarian \"" + keyword + "\":");
+        for (String[] b : buku) {
+            if (b[0].toLowerCase().contains(keyword.toLowerCase())) {
+                System.out.println(Arrays.toString(b));
+            }
+        }
     }
 
     public static double hitungRataRata(ArrayList<Integer> values) {
-        // TODO: Hitung rata-rata
-        return 0.0;
+        if (values.isEmpty()) return 0;
+        int sum = 0;
+        for (int v : values) sum += v;
+        return (double) sum / values.size();
     }
 }
